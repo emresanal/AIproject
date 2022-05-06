@@ -5,10 +5,6 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
-    /*public Transform RayLF;
-    public Transform RayRF;
-    public Transform RayLR;
-    public Transform RayRR;*/
     public GameObject bulletPrefab;
 
     public float bulletForce;

@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
-        Debug.Log(CheckWalls().ToString());
-        Debug.Log(CheckSightline());
+        //Debug.Log(CheckWalls().ToString());
+        //Debug.Log(CheckSightline());
         // Physics Calculations
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
@@ -83,27 +83,53 @@ public class PlayerMovement : MonoBehaviour
     bool[] CheckWalls()
     {
         bool[] legalDirections = new bool[] { true, true, true, true };
-        if ((Physics2D.Raycast(RayLF.position, RayLF.up, wallDetectionRange).collider != null && Physics2D.Raycast(RayLF.position, RayLF.up, wallDetectionRange).collider.tag == "Tilemap") || (Physics2D.Raycast(RayRF.position, RayRF.up, wallDetectionRange).collider != null && Physics2D.Raycast(RayRF.position, RayRF.up, wallDetectionRange).collider.tag == "Tilemap"))
+
+        if ((Physics2D.Raycast(RayLF.position, Vector3.up, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLF.position, Vector3.up, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRF.position, Vector3.up, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRF.position, Vector3.up, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayLR.position, Vector3.up, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLR.position, Vector3.up, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRR.position, Vector3.up, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRR.position, Vector3.up, wallDetectionRange).collider.tag == "Tilemap"))
         {
-            Debug.Log("wall front");
+            Debug.Log("wall up");
             legalDirections[0] = false;
         }
-
-        if ((Physics2D.Raycast(RayRF.position, RayRF.right, wallDetectionRange).collider != null && Physics2D.Raycast(RayRF.position, RayRF.right, wallDetectionRange).collider.tag == "Tilemap") || (Physics2D.Raycast(RayRR.position, RayRR.right * -1, wallDetectionRange).collider != null && Physics2D.Raycast(RayRR.position, RayRR.right * -1, wallDetectionRange).collider.tag == "Tilemap"))
+        if ((Physics2D.Raycast(RayLF.position, Vector3.right, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLF.position, Vector3.right, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRF.position, Vector3.right, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRF.position, Vector3.right, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayLR.position, Vector3.right, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLR.position, Vector3.right, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRR.position, Vector3.right, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRR.position, Vector3.right, wallDetectionRange).collider.tag == "Tilemap"))
         {
             Debug.Log("wall right");
             legalDirections[1] = false;
         }
-
-        if ((Physics2D.Raycast(RayLR.position, RayLR.up, wallDetectionRange).collider != null && Physics2D.Raycast(RayLR.position, RayLR.up, wallDetectionRange).collider.tag == "Tilemap") || (Physics2D.Raycast(RayRR.position, RayRR.up, wallDetectionRange).collider != null && Physics2D.Raycast(RayRR.position, RayRR.up, wallDetectionRange).collider.tag == "Tilemap"))
-        {
-            Debug.Log("wall rear");
-            legalDirections[2] = false;
-        }
-
-        if ((Physics2D.Raycast(RayLF.position, RayLF.right * -1, wallDetectionRange).collider != null && Physics2D.Raycast(RayLF.position, RayLF.right * -1, wallDetectionRange).collider.tag == "Tilemap") || (Physics2D.Raycast(RayLR.position, RayRF.right, wallDetectionRange).collider != null && Physics2D.Raycast(RayLR.position, RayRF.right, wallDetectionRange).collider.tag == "Tilemap"))
+        if ((Physics2D.Raycast(RayLF.position, Vector3.left, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLF.position, Vector3.left, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRF.position, Vector3.left, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRF.position, Vector3.left, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayLR.position, Vector3.left, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLR.position, Vector3.left, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRR.position, Vector3.left, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRR.position, Vector3.left, wallDetectionRange).collider.tag == "Tilemap"))
         {
             Debug.Log("wall left");
+            legalDirections[2] = false;
+        }
+        if ((Physics2D.Raycast(RayLF.position, Vector3.down, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLF.position, Vector3.down, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRF.position, Vector3.down, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRF.position, Vector3.down, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayLR.position, Vector3.down, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayLR.position, Vector3.down, wallDetectionRange).collider.tag == "Tilemap") ||
+            (Physics2D.Raycast(RayRR.position, Vector3.down, wallDetectionRange).collider != null &&
+            Physics2D.Raycast(RayRR.position, Vector3.down, wallDetectionRange).collider.tag == "Tilemap"))
+        {
+            Debug.Log("wall down");
             legalDirections[3] = false;
         }
 

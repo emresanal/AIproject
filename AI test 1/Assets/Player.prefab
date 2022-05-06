@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4802140522943534755}
   - component: {fileID: 4802140522943534753}
   - component: {fileID: 2762995819080655510}
+  - component: {fileID: 8596702886010260209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4802140522943534759}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d804d4c899085845ad8141f3c3773c3, type: 3}
   m_Name: 
@@ -294,6 +295,27 @@ MonoBehaviour:
   firePoint: {fileID: 4802140521474624383}
   bulletPrefab: {fileID: 6723275753935011499, guid: bed6237ce9c841145883fb6b4a3cf657, type: 3}
   bulletForce: 10
+--- !u!114 &8596702886010260209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4802140522943534759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222a812028083a640856c5f69636c491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  rb: {fileID: 4802140522943534758}
+  health: 5
+  wallDetectionRange: 1
+  RayLF: {fileID: 2711534763321754458}
+  RayRF: {fileID: 3036582296250317060}
+  RayLR: {fileID: 3695048873286370395}
+  RayRR: {fileID: 7955468099260643181}
+  firePoint: {fileID: 4802140521474624383}
 --- !u!1 &6647414594730534850
 GameObject:
   m_ObjectHideFlags: 0
