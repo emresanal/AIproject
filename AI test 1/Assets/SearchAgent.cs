@@ -21,7 +21,7 @@ public class SearchAgent{
 		List<Vector3> path;
 		int cost;
 	}*/
-	
+	/*
 	public List<Vector3> search(Vector3 pos){
 
         if (search_method == 0)
@@ -288,8 +288,9 @@ public class SearchAgent{
 					//return v;
 				}
 		return null;	
-	}
+	}*/
 }
+
 
 
 
