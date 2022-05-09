@@ -49,7 +49,7 @@ public class BFS : MonoBehaviour
             return; 
         }
             
-        //Debug.Log("xd");
+        //Debug.Log(count);
         Move(path[count]);
         count++;
     }
@@ -62,7 +62,7 @@ public class BFS : MonoBehaviour
 
     void Move(Vector3 direction)
     {
-        Debug.Log(direction);
+        //Debug.Log(direction);
         transform.position += direction;
         float angle = Mathf.Atan2(-moveDirection.x, moveDirection.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -72,9 +72,9 @@ public class BFS : MonoBehaviour
     {
 
         Queue<State> q = new Queue<State>();
-        List<Vector3> visited = new List<Vector3>();
+        //List<Vector3> visited = new List<Vector3>();
         //List<State> visited = new List<State>();
-
+        List<Vector3> visited = new List<Vector3>();
         List<Vector3> v = new List<Vector3>();
 
         if (checkEnd(pos))
@@ -94,21 +94,35 @@ public class BFS : MonoBehaviour
 
         while (q.Count != 0)
         {
-
+            //Debug.Log("bas");
             cur_state = q.Dequeue();
             cur_pos = cur_state.pos;
 
             //while(q.Count != 0){
-            if (visited.Contains(cur_pos))
+            bool flag = false;
+            for(int i = 0; i < visited.Count; i++)
             {
-                Debug.Log("found");
-                Debug.Log(cur_pos);
-                continue;
+                if (visited[i].Equals(cur_pos))
+                {
+                    flag = true;
+                    break;
+                }
             }
+            /*if (visited.Contains(cur_pos))
+            {
+                //Debug.Log("found");
+                //Debug.Log(cur_pos);
+                if (visited.Contains(new Vector3(-4.0f, 1.0f,0.0f)))
+                    //Debug.Log("YEEEEAAA");
+                continue;
+            }*/
+            if (flag)
+                continue;
 
                 
             visited.Add(cur_pos);
 
+            //Debug.Log(cur_pos);
             var legals = getLegalActions(cur_pos);
 
             for (int i = 0; i < 4; i++)
@@ -119,6 +133,13 @@ public class BFS : MonoBehaviour
 
                 if (checkEnd(cur_pos))
                 {
+                    Debug.Log("Exit1");
+                    Debug.Log(cur_pos);
+                    Debug.Log(cur_state.path.Count);
+                    Debug.Log(cur_state.cost);
+                    //for (int j =0; j<cur_state.path.Count;j++)
+                    //   Debug.Log(cur_state.path[j]);
+
                     return cur_state.path;
                     //return v;
                 }
@@ -129,29 +150,35 @@ public class BFS : MonoBehaviour
 
                 next_state.cost = cur_state.cost + 1;
                 next_state.act_cost = cur_state.act_cost + 1;
-                next_state.path = cur_state.path;
-                Vector3 new_pos = cur_state.pos + direc[i];
+                for(int j = 0;j< cur_state.path.Count; j++)
+                {
+                    next_state.path.Add(cur_state.path[j]);
+                }
+                //next_state.path = cur_state.path;
+                //Debug.Log(cur_pos);
+                Vector3 new_pos = cur_pos + direc[i];
                 next_state.pos = new_pos;
 
                 
                
                 next_state.path.Add(direc[i]);
-                Debug.Log("Enqued");
-                Debug.Log(next_state.pos);
-                Debug.Log(next_state.cost);
-                Debug.Log(next_state.path.Count);
+                //Debug.Log("Enqued");
+                //Debug.Log(next_state.pos);
+                //Debug.Log(next_state.cost);
+                //Debug.Log(next_state.path.Count);
                 q.Enqueue(next_state);
 
             }
-            if (q.Count == 0)
-                return cur_state.path;
+            //if (q.Count == 0)
+            //    return cur_state.path;
             //cur_state = q.Dequeue();
-            Debug.Log("Dequed");
-            Debug.Log(cur_state.pos);
-            cur_pos = cur_state.pos;
+            //Debug.Log("Dequed");
+            //Debug.Log(cur_state.pos);
+            //cur_pos = cur_state.pos;
         }
         if (checkEnd(cur_pos))
         {
+            Debug.Log("Exit2");
             return cur_state.path;
             //return v;
         }
@@ -160,7 +187,7 @@ public class BFS : MonoBehaviour
 
     bool[] getLegalActions(Vector3 inp)
     {
-        Vector3 dif = new Vector3(center.position.x - inp.x, center.position.y - inp.y, 0f);
+        Vector3 dif = new Vector3(inp.x - center.position.x , inp.y - center.position.y , 0f);
         bool[] legalDirections = new bool[] { true, true, true, true };
 
         //Debug.Log("Pseudo Grid location = " + Mathf.Floor(center.position.x * 4) / 4 + "," + Mathf.Floor(center.position.y * 4) / 4);
@@ -231,7 +258,7 @@ public class BFS : MonoBehaviour
 
     bool checkEnd(Vector3 pos)
     {
-        if (ManhattanDistancetoObject(pos, endPoint.transform.position) < 0.5)
+        if (ManhattanDistancetoObject(pos, endPoint.transform.position) < 0.25)
         {
             return true;
         }
