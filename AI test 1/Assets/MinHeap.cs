@@ -1,11 +1,11 @@
-using State;
+//using State;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MinHeap
         {
-            private readonly State[] _elements;
+            private State[] _elements;
             private int _size;
 			private int max_size;
             public MinHeap(int size)
@@ -22,9 +22,9 @@ public class MinHeap
             private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < _size;
             private bool IsRoot(int elementIndex) => elementIndex == 0;
 
-            private int GetLeftChild(int elementIndex) => _elements[GetLeftChildIndex(elementIndex)];
-            private int GetRightChild(int elementIndex) => _elements[GetRightChildIndex(elementIndex)];
-            private int GetParent(int elementIndex) => _elements[GetParentIndex(elementIndex)];
+            private State GetLeftChild(int elementIndex) => _elements[GetLeftChildIndex(elementIndex)];
+            private State GetRightChild(int elementIndex) => _elements[GetRightChildIndex(elementIndex)];
+            private State GetParent(int elementIndex) => _elements[GetParentIndex(elementIndex)];
 
             private void Swap(int firstIndex, int secondIndex)
             {
@@ -45,7 +45,7 @@ public class MinHeap
             public State Peek()
             {
                 if (_size == 0)
-                    throw new IndexOutOfRangeException();
+                    return null;
 
                 return _elements[0];
             }
@@ -53,7 +53,7 @@ public class MinHeap
             public State Pop()
             {
                 if (_size == 0)
-                    throw new IndexOutOfRangeException();
+                    return null;
 
                 var result = _elements[0];
                 _elements[0] = _elements[_size - 1];
@@ -108,7 +108,7 @@ public class MinHeap
             }
 			private void resize(){
 				int new_size = max_size *2;
-				Vector2[] temp = new Vector2[new_size];
+                State[] temp = new State[new_size];
 				for(int i = 0; i < max_size;i++){
 					temp[i] = _elements[i];
 				}
