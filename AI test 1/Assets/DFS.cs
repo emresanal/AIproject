@@ -49,7 +49,7 @@ public class DFS : MonoBehaviour
             return;
         }
 
-        //Debug.Log(count);
+        //Debug.Log(path.Count);
         Move(path[count]);
         count++;
     }
@@ -64,6 +64,7 @@ public class DFS : MonoBehaviour
     {
         //Debug.Log(direction);
         transform.position += direction;
+        moveDirection = direction;
         float angle = Mathf.Atan2(-moveDirection.x, moveDirection.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
@@ -137,6 +138,8 @@ public class DFS : MonoBehaviour
                     Debug.Log(cur_pos);
                     Debug.Log(cur_state.path.Count);
                     Debug.Log(cur_state.cost);
+                    Debug.Log(cur_state.act_cost);
+                    Debug.Log(q.Count + visited.Count);
                     //for (int j =0; j<cur_state.path.Count;j++)
                     //   Debug.Log(cur_state.path[j]);
 
