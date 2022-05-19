@@ -107,15 +107,45 @@ public class MiniMax: MonoBehaviour{
     double evaluationFunction(GameState gamestate)
     {
         double finalscore = 0;
-        finalscore += (double)(gamestate.playerscore);
+        finalscore += (double)(gamestate.playerScore);
 
         if (gamestate.playerHealth > gamestate.enemyHealth)
         {
             finalscore += 1;
         }
 
-        if ()
+        finalscore += 5 / (double)ManhattanDistancetoObject(gamestate.playerPos, gamestate.enemyPos);
+
+        if (ManhattanDistancetoObject(gamestate.playerPos, gamestate.enemyPos) < 4)
+        {
+            finalscore -= 1;
+        }
+
+        if (gamestate.playerActions[4] || gamestate.playerActions[5] || gamestate.playerActions[6] || gamestate.playerActions[7])
+        {
+            finalscore += 5;
+        }
 
         return finalscore;
+    }
+
+    float ManhattanDistancetoObject(Vector3 first, Vector3 second)
+    {
+        float distance = Mathf.Abs(first.x - second.x) + Mathf.Abs(first.y - second.y);
+        return distance;
+    }
+
+    bool[] getLegalActions(int ID, GameState gamestate)
+    {
+        if (ID == 0)
+        {
+            return gamestate.playerActions;
+        }
+
+        else
+        {
+            return gamestate.enemyActions;
+        }
+
     }
 }
