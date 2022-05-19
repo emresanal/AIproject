@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniMax: MonoBehaviour{
-
+public class AlphaBeta: Monobehaviour
+{
 	private static Vector3 up = new Vector3(0f, 0.25f, 0f);
     private static Vector3 right = new Vector3(0.25f, 0f, 0f);
     private static Vector3 left = new Vector3(-0.25f, 0f, 0f);
@@ -13,7 +13,7 @@ public class MiniMax: MonoBehaviour{
 	
 	private static int max_depth = 4;
 	
-	public AdversarialNode select_max(List<AdversarialNode> evals){
+	/*public AdversarialNode select_max(List<AdversarialNode> evals){
 		AdversarialNode temp = new AdversarialNode();
 		temp.score = -7.997e307 + -9.985e307;
         foreach (AdversarialNode node in evals) {
@@ -33,9 +33,9 @@ public class MiniMax: MonoBehaviour{
                 temp = node;
 		}
 		return temp;
-	}
+	}*/
 	
-	public AdversarialNode maximize(GameState gamestate, int cur_depth, AdversarialNode cur_node, int object_no){
+	public AdversarialNode maximize(GameState gamestate, int cur_depth, AdversarialNode cur_node, int object_no, double alpha, double beta){
 		
 		if( gamestate.gameWin || cur_depth >= max_depth){
 			cur_node.score += evaluationFunction(gamestate);// BU LAZIM
@@ -43,10 +43,14 @@ public class MiniMax: MonoBehaviour{
 		}
 			
 		
-		List<AdversarialNode> evals = new List<AdversarialNode>();
+		//List<AdversarialNode> evals = new List<AdversarialNode>();
 		
 		// 0 : ID, gamestate: gameState
 		bool[] legalActions = getLegalActions(0, gamestate); // BU LAZIM
+		
+		double cur_max = -7.997e307 + -9.985e307;
+		
+		AdversarialNode return_node = new AdversarialNode();
 		
 		for( int i = 0; i < 8; i++){
 			
@@ -64,20 +68,34 @@ public class MiniMax: MonoBehaviour{
 			new_node.sequence.Add(new_action);
 			
 			// object_no = 1
-			evals.Add(minimize(new_gamestate,cur_depth,new_node,1));	
+			AdversarialNode temp_node = minimize(new_gamestate,cur_depth,new_node,1,alpha,beta);
+			
+			cur_max = (temp_node.score > cur_max) ? temp_node.score : cur_max;
+			
+			if(cur_max > beta){
+				return_node.path = cur_node.path;
+				return_node.score = cur_max;
+				return return_node;
+			}
+			alpha = (cur_max >alpha) ? cur_max : alpha;
+			//evals.Add();	
 			
 		}	
 		return select_max(evals);
 	}
 	
-	public AdversarialNode minimize(GameState gamestate, int cur_depth, AdversarialNode cur_node, int object_no){
+	public AdversarialNode minimize(GameState gamestate, int cur_depth, AdversarialNode cur_node, int object_no,double alpha,double beta){
 		
 		if( gamestate.gameWin || cur_depth >= max_depth){
 			cur_node.score += evaluationFunction(gamestate);// BU LAZIM
 			return cur_node;
 		}
 		
-		List<AdversarialNode> evals = new List<AdversarialNode>();
+		double cur_min = 200000000;
+		
+		AdversarialNode return_node = new AdversarialNode();
+		
+		//List<AdversarialNode> evals = new List<AdversarialNode>();
 		
 		// object_no : ID, gamestate: gameState
 		bool[] legalActions = getLegalActions(object_no, gamestate); // BU LAZIM
@@ -94,11 +112,20 @@ public class MiniMax: MonoBehaviour{
             // object_no: ID, new_action: action
             GameState new_gamestate = gamestate.generateSuccessor(object_no, new_action); // BU LAZIM
 			
-			AdversarialNode new_node = new AdversarialNode(cur_node.sequence,cur_node.score -1.0);
+			AdversarialNode new_node = new AdversarialNode(cur_node.sequence,cur_node.score -1.0, alpha, beta);
 			new_node.sequence.Add(new_action);
 			
+			AdversarialNode temp_node = maximize(new_gamestate,cur_depth + 1,new_node,0,alpha,beta)	
 			
-			evals.Add(maximize(new_gamestate,cur_depth + 1,new_node,0));	
+			cur_min = (temp_node.score <= cur_min) ? temp_node.score : cur_min;
+			
+			if(cur_min < alpha){
+				return_node.path = cur_node.path;
+				return_node.score = cur_min;
+				return return_node;
+			}
+			
+			beta = (cur_min <= beta) ? cur_min : beta;
 			
 		}	
 		return select_min(evals);
@@ -118,4 +145,5 @@ public class MiniMax: MonoBehaviour{
 
         return finalscore;
     }
+
 }
