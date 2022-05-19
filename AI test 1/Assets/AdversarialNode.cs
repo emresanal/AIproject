@@ -12,7 +12,7 @@ public class AdversarialNode: MonoBehaviour
 		score = 0;
 	}
 	
-	public AdversarialNode(List<Action> lst, double, scr){
+	public AdversarialNode(List<Action> lst, double scr){
 		sequence = lst;
 		score = scr;
 	}

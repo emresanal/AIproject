@@ -8,6 +8,9 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
 
     public float bulletForce;
+    public float cooldownTime;
+    private float nextFireTime;
+    public bool fireLegal;
 
     // Update is called once per frame
     void Update()
@@ -18,9 +21,14 @@ public class Shooting : MonoBehaviour
 
     void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        fireLegal = Time.time > nextFireTime;
+        if (fireLegal)
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+                nextFireTime = Time.time + cooldownTime;
+            }
         }
     }
 
