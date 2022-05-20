@@ -3825,7 +3825,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634462355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f07c91383c77384a9f242236b1272d8, type: 3}
   m_Name: 
@@ -3845,6 +3845,82 @@ MonoBehaviour:
   moveSpeed: 2
   wallDetectionRange: 0.5
   endPoint: {fileID: 1694035786}
+  playerRayLF: {fileID: 692157374}
+  playerRayRF: {fileID: 1063877824}
+  playerRayLR: {fileID: 1016926948}
+  playerRayRR: {fileID: 135563720}
+  playercenter: {fileID: 618784704}
+  playerFirePoint: {fileID: 1835709685}
+  enemyRayLF: {fileID: 8934477}
+  enemyRayRF: {fileID: 8934476}
+  enemyRayLR: {fileID: 8934475}
+  enemyRayRR: {fileID: 8934474}
+  enemycenter: {fileID: 8934473}
+  enemyFirePoint: {fileID: 8934478}
+--- !u!114 &1634462363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634462355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f59cb72cda1a364ba316bae094299c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1634462355}
+  enemy: {fileID: 8934472}
+  playerPos: {x: 0, y: 0, z: 0}
+  playerHealth: 0
+  enemyPos: {x: 0, y: 0, z: 0}
+  enemyHealth: 0
+  playerScript: {fileID: 0}
+  enemyScript: {fileID: 0}
+  frame_cnt: 0
+  lst_cnt: 0
+  playerLegalActions: 0101010100000000
+  enemyLegalActions: 0101010100000000
+  moveSpeed: 2
+  wallDetectionRange: 0.5
+  endPoint: {fileID: 1694035786}
+  playerRayLF: {fileID: 692157374}
+  playerRayRF: {fileID: 1063877824}
+  playerRayLR: {fileID: 1016926948}
+  playerRayRR: {fileID: 135563720}
+  playercenter: {fileID: 618784704}
+  playerFirePoint: {fileID: 1835709685}
+  enemyRayLF: {fileID: 8934477}
+  enemyRayRF: {fileID: 8934476}
+  enemyRayLR: {fileID: 8934475}
+  enemyRayRR: {fileID: 8934474}
+  enemycenter: {fileID: 8934473}
+  enemyFirePoint: {fileID: 8934478}
+--- !u!114 &1634462364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634462355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cf61fb80059954d84f6d08a537cc59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  playerPos: {x: 0, y: 0, z: 0}
+  playerHealth: 0
+  enemyPos: {x: 0, y: 0, z: 0}
+  enemyHealth: 0
+  playerScript: {fileID: 0}
+  enemyScript: {fileID: 0}
+  moveSpeed: 2
+  wallDetectionRange: 0.5
+  endPoint: {fileID: 1694035786}
+  frame_cnt: 0
+  lst_cnt: 0
   playerRayLF: {fileID: 692157374}
   playerRayRF: {fileID: 1063877824}
   playerRayLR: {fileID: 1016926948}

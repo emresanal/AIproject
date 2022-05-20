@@ -53,7 +53,8 @@ public class RandomMovement : MonoBehaviour
 
         if (CheckSightline())
         {
-            playerScript.Fire();
+            //playerScript.Fire();
+            int a =2 + 2;
         }
 
     }
