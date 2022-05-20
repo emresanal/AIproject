@@ -43,16 +43,16 @@ public class LegalActions : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+   /** void FixedUpdate()
     {
         if (checkEnd(center.position))
             return;
 
         legalActions = getLegalActions(center.position);
-        Debug.Log(legalActions[7]);
-    }
+        //Debug.Log(legalActions[7]);
+    }**/
 
-    bool[] getLegalActions(Vector3 pos)
+    public bool[] getLegalActions(Vector3 pos)
     {
         fireCheck = shooting.fireLegal;
         Vector3 dif = new Vector3(pos.x - center.position.x, pos.y - center.position.y, 0f);
@@ -68,7 +68,7 @@ public class LegalActions : MonoBehaviour
              Physics2D.Raycast(RayRR.position + dif, Vector3.up, wallDetectionRange).collider.tag == "Tilemap"))
         {
             //Debug.Log(RayLF.position);
-            //Debug.Log(center.position);
+            //Debug.Log(center.position + dif);
             //Debug.Log(dif);
             //Debug.Log("wall up");
             legalActions[0] = false;
@@ -110,37 +110,37 @@ public class LegalActions : MonoBehaviour
             legalActions[3] = false;
         }
 
-        if (Physics2D.Raycast(center.position + dif + up2, up).collider.tag == "Player" &&
-            Physics2D.Raycast(center.position + dif + up2, up).collider.tag != null &&
-           fireCheck)
+        /**if (Physics2D.Raycast(center.position + dif + up2, up).collider.tag != null && 
+            Physics2D.Raycast(center.position + dif + up2, up).collider.tag == "Player" &&            
+            fireCheck)
         {
             //Debug.Log("enemy sightline up");
             legalActions[4] = true;
         }
 
-        if(Physics2D.Raycast(center.position + dif + right2, right).collider.tag == "Player" &&
-           Physics2D.Raycast(center.position + dif + right2, right).collider.tag != null &&
-           fireCheck)
+        if (Physics2D.Raycast(center.position + dif + right2, right).collider.tag != null &&
+            Physics2D.Raycast(center.position + dif + right2, right).collider.tag == "Player" &&
+            fireCheck)
         {
             //Debug.Log("enemy sightline right");
             legalActions[5] = true;
         }
 
-        if(Physics2D.Raycast(center.position + dif + left2, left).collider.tag == "Player" &&
-           Physics2D.Raycast(center.position + dif + left2, left).collider.tag != null &&
-           fireCheck)
+        if (Physics2D.Raycast(center.position + dif + left2, left).collider.tag != null &&
+            Physics2D.Raycast(center.position + dif + left2, left).collider.tag == "Player" &&
+            fireCheck)
         {
             //Debug.Log("enemy sightline left");
             legalActions[6] = true;
         }
 
-        if(Physics2D.Raycast(center.position + dif + down2, down).collider.tag == "Player" && 
-           Physics2D.Raycast(center.position + dif + down2, down).collider.tag != null &&
-           fireCheck)
+        if (Physics2D.Raycast(center.position + dif + down2, down).collider.tag != null &&
+            Physics2D.Raycast(center.position + dif + down2, down).collider.tag == "Player" &&
+            fireCheck)
         {
             //Debug.Log("enemy sightline down");
             legalActions[7] = true;
-        }
+        }**/
 
         return legalActions;
     }

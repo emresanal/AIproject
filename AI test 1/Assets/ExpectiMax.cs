@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class ExpectiMax: MonoBehaviour{
 
 	private static Vector3 up = new Vector3(0f, 0.25f, 0f);
@@ -153,4 +153,4 @@ public class ExpectiMax: MonoBehaviour{
         }
 
     }
-}
+}*/
