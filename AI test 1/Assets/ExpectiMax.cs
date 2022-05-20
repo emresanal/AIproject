@@ -123,6 +123,7 @@ public class ExpectiMax : MonoBehaviour
 
     public AdversarialNode average(List<AdversarialNode> evals)
     {
+
         AdversarialNode temp = new AdversarialNode();
         temp.score = 200000000;
         double sum = 0;
@@ -133,6 +134,7 @@ public class ExpectiMax : MonoBehaviour
             count++;
         }
         double result = sum / count;
+
         temp.score = result;
 
         return temp;
@@ -168,7 +170,7 @@ public class ExpectiMax : MonoBehaviour
             // 0: ID, new_action: action
             //GameState new_gamestate = gamestate.generateSuccessor(0, new_action); // BU LAZIM
 
-            AdversarialNode new_node = new AdversarialNode(cur_node.sequence, cur_node.score - 1.0);
+            AdversarialNode new_node = new AdversarialNode(cur_node.sequence, cur_node.score);
             new_node.sequence.Add(new_action);
 
             // object_no = 1
@@ -177,6 +179,7 @@ public class ExpectiMax : MonoBehaviour
         }
         if (evals.Count == 0)
         {
+            Debug.Log("AGUGUGU");
             AdversarialNode rtn = new AdversarialNode();
             rtn.score = -20000000;
             return rtn;
@@ -203,7 +206,7 @@ public class ExpectiMax : MonoBehaviour
 
             if (!legalActions[i])
                 continue;
-
+            //Debug.Log("Hola");
             bool isFire = (i >= 4) ? true : false;
 
             Action new_action = new Action(direc[i % 4], isFire);
@@ -218,9 +221,19 @@ public class ExpectiMax : MonoBehaviour
 
 
             evals.Add(maximize(cur_pos, new_pos, cur_depth + 1, new_node, 0));
-
+            //Debug.Log(evals.Count);
         }
-        return average(evals);
+        if (evals.Count == 0)
+        {
+            Debug.Log("agubugu");
+            AdversarialNode rtn = new AdversarialNode();
+            rtn.score = 20000000;
+            return rtn;
+        }
+        AdversarialNode test = average(evals);
+        test.sequence = cur_node.sequence;
+        
+        return test;
     }
 
     bool CheckSightline()
@@ -237,7 +250,7 @@ public class ExpectiMax : MonoBehaviour
     double evaluationFunction(Vector3 cur_pos, Vector3 enemy_pos)
     {
         enemy_pos = enemy.transform.position;
-        Debug.Log("cur_pos " + cur_pos + "  enemy_pos " + enemy_pos);
+        //Debug.Log("cur_pos " + cur_pos + "  enemy_pos " + enemy_pos);
         double finalscore = 0;
         //finalscore += (double)(gamestate.playerScore);
 
